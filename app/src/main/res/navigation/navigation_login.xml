@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/navigation_splash">
+    <fragment
+        android:id="@+id/navigation_login"
+        android:name="com.app.facepro.faceproschool.ui.login.LoginFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_home" >
+        <argument
+            android:name="firebase_token"
+            app:argType="string"
+            android:defaultValue='""'
+            app:nullable="true" />
+        <action
+            android:id="@+id/action_navigation_login_to_OTPLoginFragment"
+            app:destination="@id/OTPLoginFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_splash"
+        android:name="com.app.facepro.faceproschool.ui.splash.SplashFragment"
+        android:label="SplashFragment" >
+        <action
+            android:id="@+id/action_splashFragment_to_navigation_login"
+            app:popUpTo="@id/navigation_splash"
+            app:popUpToInclusive="true"
+            app:destination="@id/navigation_login" />
+    </fragment>
+    <fragment
+        android:id="@+id/OTPLoginFragment"
+        android:name="com.app.facepro.faceproschool.ui.otp.OTPLoginFragment"
+        android:label="OTPLoginFragment" >
+        <action
+            android:id="@+id/action_OTPLoginFragment_to_resetPasswordFragment"
+            app:popUpTo="@id/OTPLoginFragment"
+            app:popUpToInclusive="true"
+            app:destination="@id/resetPasswordFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/resetPasswordFragment"
+        android:name="com.app.facepro.faceproschool.ui.reset.ResetPasswordFragment"
+        android:label="ResetPassword" >
+        <action
+            android:id="@+id/action_resetPasswordFragment_to_navigation_login"
+            app:popUpTo="@id/resetPasswordFragment"
+            app:popUpToInclusive="true"
+            app:destination="@id/navigation_login" />
+        <argument
+            android:name="user_id"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue='""' />
+    </fragment>
+</navigation>

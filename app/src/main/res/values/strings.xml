@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">School-SmartFacePro</string>
+    <string name="title_home">Home</string>
+    <string name="title_login">Login</string>
+    <string name="title_calendar">Calendar</string>
+    <string name="title_event">Event</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="login_failed">Login failed please check your userId and password</string>
+    <string name="title_profile">Profile</string>
+    <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
+    <string name="no_notification">No notification found</string>
+    <string name="hint_user_name">Name</string>
+    <string name="hint_address">Address</string>
+    <string name="profile_updated_succssfully">Profile successfully updated</string>
+    <string name="profile_update_failed">Profile update failed</string>
+    <string name="hint_email">Email Address</string>
+    <string name="enter_registered_mobile_number_to_send_one_time_password">Enter registered mobile number to send one time password</string>
+    <string name="enter_otp">Enter OTP</string>
+    <string name="validate">Validate</string>
+    <string name="send">Send</string>
+    <string name="error_send_to_phone">Otp send to phone is failed</string>
+    <string name="password_update_failed">Password update failed</string>
+    <string name="password_updated">Password updated successfully</string>
+</resources>
