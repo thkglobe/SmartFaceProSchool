@@ -8,9 +8,38 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:980998233240:android:55a8cfc351b97e4a4c84ed",
+        "mobilesdk_app_id": "1:980998233240:android:4727e0a4fa3595734c84ed",
         "android_client_info": {
           "package_name": "com.app.facepro.faceproschool"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "980998233240-9iou7iiqr2ace32p081l3lnsnqa4pibf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyClR_gFg9PARKUNDPet4_ShjtnSVNLE40k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "980998233240-9iou7iiqr2ace32p081l3lnsnqa4pibf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:980998233240:android:55a8cfc351b97e4a4c84ed",
+        "android_client_info": {
+          "package_name": "com.thkglobe.app.facepro"
         }
       },
       "oauth_client": [
@@ -18,7 +47,7 @@
           "client_id": "980998233240-t7qmurpl7gphkuotgreo4oel3t8dribr.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.app.facepro.faceproschool",
+            "package_name": "com.thkglobe.app.facepro",
             "certificate_hash": "8aa73e855279609e7b2d5577caac2794ed00a5a2"
           }
         },

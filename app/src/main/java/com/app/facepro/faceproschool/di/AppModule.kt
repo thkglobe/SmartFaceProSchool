@@ -47,7 +47,7 @@ val appModule = module {
     factory {
         Retrofit.Builder()
             .client(get())
-            .baseUrl("http://embedcon.com/EmbdSecService/")
+            .baseUrl("http://embedcon.com/EmbdSchService/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
