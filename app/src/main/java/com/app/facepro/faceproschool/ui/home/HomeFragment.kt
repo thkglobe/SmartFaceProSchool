@@ -21,7 +21,7 @@ class HomeFragment : Fragment() {
 
     private  val homeViewModel: HomeViewModel by viewModel()
     private val sharedViewModel: SharedViewModel by sharedViewModel()
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         super.onAttach(context)
         sharedViewModel.visibleToolbar(MenuVisibility.BOTH)
     }

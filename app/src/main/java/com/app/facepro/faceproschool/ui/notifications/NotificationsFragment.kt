@@ -24,7 +24,7 @@ class NotificationsFragment : Fragment() {
     private val viewModel: NotificationsViewModel by viewModel()
     private val sharedViewModel: SharedViewModel by sharedViewModel()
     private lateinit var binder: FragmentNotificationsBinding
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         super.onAttach(context)
         sharedViewModel.visibleToolbar(MenuVisibility.TOOL_BAR)
     }
@@ -94,7 +94,7 @@ class NotificationsFragment : Fragment() {
         }
     }
 
-    override fun onPrepareOptionsMenu(menu: Menu?) {
+    override fun onPrepareOptionsMenu(menu: Menu) {
         menu?.findItem(R.id.menu_notification)?.isVisible = false
     }
 

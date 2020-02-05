@@ -27,7 +27,7 @@ import org.koin.android.viewmodel.ext.android.sharedViewModel
 class SplashFragment : Fragment() {
     private val preferenceManager by inject<PreferenceManager>()
     private val sharedViewModel: SharedViewModel by sharedViewModel()
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         super.onAttach(context)
         sharedViewModel.visibleToolbar(MenuVisibility.NO_MENU)
     }

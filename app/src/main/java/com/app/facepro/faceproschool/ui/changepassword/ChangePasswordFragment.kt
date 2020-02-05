@@ -20,7 +20,7 @@ class ChangePasswordFragment : Fragment() {
     private val profileViewModel: ProfileViewModel by viewModel()
     private val sharedViewModel: SharedViewModel by sharedViewModel()
 
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         super.onAttach(context)
         sharedViewModel.visibleToolbar(MenuVisibility.TOOL_BAR)
     }
@@ -85,7 +85,7 @@ class ChangePasswordFragment : Fragment() {
         }
     }
 
-    override fun onPrepareOptionsMenu(menu: Menu?) {
+    override fun onPrepareOptionsMenu(menu: Menu) {
         menu?.findItem(R.id.menu_notification)?.isVisible = false
     }
 

@@ -51,6 +51,7 @@
             app:layout_constraintTop_toTopOf="@+id/txt_date_day"
             tools:text="Mon\nNov" />
 
+
         <androidx.cardview.widget.CardView
             android:id="@+id/pan_1_msg"
             android:layout_width="0dp"
@@ -58,11 +59,10 @@
             android:layout_marginLeft="15sp"
             android:layout_marginTop="16dp"
             android:layout_marginRight="15sp"
-            android:layout_marginBottom="15sp"
             app:cardElevation="1dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_date_day"
+            app:layout_constraintTop_toBottomOf="@+id/txt_welcome_msg"
             card_view:cardBackgroundColor="@color/light_blue_transparent"
             card_view:cardCornerRadius="4dp">
 
@@ -154,13 +154,48 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:progressState="@{vm.uiState}" />
+
         <com.app.facepro.faceproschool.common.AutoScrollViewPager
+            android:id="@+id/pager"
             android:layout_width="0dp"
-            android:layout_height="250dp"
+            android:layout_height="0dp"
             android:layout_marginTop="20dp"
-            app:pagerAdapter="@{vm.pan3MsgDetailsItem}"
+            android:layout_marginBottom="32dp"
+            app:indicator="@{indicator}"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pan_2_msg" />
+            app:layout_constraintTop_toBottomOf="@+id/pan_2_msg"
+            app:pagerAdapter="@{vm.pan3MsgDetailsItem}" />
+
+        <com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
+            android:id="@+id/indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:dotsColor="@color/light_blue"
+            app:dotsSize="12dp"
+            app:dotsStrokeColor="@color/light_blue"
+            app:layout_constraintEnd_toEndOf="@+id/pager"
+            app:layout_constraintStart_toStartOf="@+id/pager"
+            app:layout_constraintTop_toBottomOf="@+id/pager"/>
+
+
+        <TextView
+            android:id="@+id/txt_welcome_msg"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/roboto"
+            android:textSize="14sp"
+            android:layout_marginRight="16dp"
+            android:text="@{vm.pan4MsgDetailsItem.pan4_msg_details}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.306"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_date_month" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

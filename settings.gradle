@@ -1,2 +1,2 @@
-include ':app'
-rootProject.name='SmartFaceProSchool'
+include ':app', ':imagepicker'
+rootProject.name='SmartFaceProSecure'

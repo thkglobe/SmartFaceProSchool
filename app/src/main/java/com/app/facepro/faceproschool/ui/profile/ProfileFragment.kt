@@ -1,21 +1,25 @@
 package com.app.facepro.faceproschool.ui.profile
 
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import com.app.facepro.faceproschool.databinding.FragmentProfileBinding
-import org.koin.android.viewmodel.ext.android.viewModel
-import android.content.Intent
 import android.app.Activity
+import android.app.Activity.RESULT_OK
+import android.content.Intent
+import android.os.Bundle
 import android.view.*
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.app.facepro.faceproschool.R
 import com.app.facepro.faceproschool.common.CircleTransform
 import com.app.facepro.faceproschool.common.Result
+import com.app.facepro.faceproschool.databinding.FragmentProfileBinding
 import com.app.facepro.faceproschool.ui.LoginActivity
+import com.nguyenhoanglam.imagepicker.model.Config
+import com.nguyenhoanglam.imagepicker.ui.imagepicker.ImagePicker
 import com.squareup.picasso.Picasso
-import com.thkglobe.app.facepro.common.MenuVisibility
+import org.koin.android.viewmodel.ext.android.viewModel
+import com.nguyenhoanglam.imagepicker.model.Image
+import java.io.File
 
 
 class ProfileFragment : Fragment() {
@@ -43,7 +47,11 @@ class ProfileFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
+        if(!profileViewModel.profilePicture.isNullOrEmpty()) {
+            Picasso.get().load(profileViewModel.profilePicture).resize(250, 250)
+                .transform(CircleTransform())
+                .into(binder.profileImage)
+        }
         profileViewModel.result.observe(viewLifecycleOwner, Observer {
             when (it) {
                 is Result.Success<*> -> {
@@ -87,23 +95,40 @@ class ProfileFragment : Fragment() {
     }
 
     fun pickImage() {
-        val intent = Intent(Intent.ACTION_GET_CONTENT)
-        intent.type = "image/*"
-        startActivityForResult(intent, PICK_PHOTO_FOR_AVATAR)
+        ImagePicker.with(this)                         //  Initialize ImagePicker with activity or fragment context
+            .setToolbarColor("#212121")         //  Toolbar color
+            .setStatusBarColor("#000000")       //  StatusBar color (works with SDK >= 21  )
+            .setToolbarTextColor("#FFFFFF")     //  Toolbar text color (Title and Done button)
+            .setToolbarIconColor("#FFFFFF")     //  Toolbar icon color (Back and Camera button)
+            .setProgressBarColor("#4CAF50")     //  ProgressBar color
+            .setBackgroundColor("#212121")      //  Background color
+            .setCameraOnly(false)               //  Camera mode
+            .setMultipleMode(false)              //  Select multiple images or single image
+            .setFolderMode(true)                //  Folder mode
+            .setShowCamera(true)                //  Show camera button
+            .setFolderTitle("Albums")           //  Folder title (works with FolderMode = true)
+            .setImageTitle("Galleries")         //  Image title (works with FolderMode = false)
+            .setDoneTitle("Done")               //  Done button title
+            .setLimitMessage("You have reached selection limit")    // Selection limit message
+            .setMaxSize(1)                     //  Max images can be selected
+            .setSavePath("facepro")         //  Image capture folder name //  Selected images
+            .setAlwaysShowDoneButton(true)      //  Set always show done button in multiple mode
+            .setRequestCode(100)                //  Set request code, default Config.RC_PICK_IMAGES
+            .setKeepScreenOn(true)              //  Keep screen on when selecting images
+            .start()
     }
 
-    companion object {
-        private const val PICK_PHOTO_FOR_AVATAR = 23
-    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == PICK_PHOTO_FOR_AVATAR && resultCode == Activity.RESULT_OK) {
-            if (data != null && data.data != null) {
-                Picasso.get().load(data.data!!).resize(250, 250)
+        if (requestCode == Config.RC_PICK_IMAGES && resultCode == RESULT_OK && data != null) {
+              val images = data.extras?.getParcelableArrayList<Image>(Config.EXTRA_IMAGES)
+            val path = images?.get(0)?.path
+            val file = File(path)
+            profileViewModel.profilePictureUpload(file)
+            Picasso.get().load(file).resize(250, 250)
                     .transform(CircleTransform())
                     .into(binder.profileImage)
-            }
         }
     }
 
@@ -129,7 +154,7 @@ class ProfileFragment : Fragment() {
         requireActivity().invalidateOptionsMenu()
     }
 
-    override fun onPrepareOptionsMenu(menu: Menu?) {
+    override fun onPrepareOptionsMenu(menu: Menu) {
         menu?.findItem(R.id.menu_logout)?.isVisible = isLogoutVisible
     }
 }

@@ -10,6 +10,7 @@ import com.app.facepro.faceproschool.common.Result
 import com.app.facepro.faceproschool.ui.home.HomePagerAdapter
 import com.app.facepro.faceproschool.ui.home.model.Pan3MsgDetailsItem
 import com.squareup.picasso.Picasso
+import com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
 
 @BindingAdapter("progressState")
 fun ProgressBar.progressState(result: Result?) {
@@ -22,15 +23,15 @@ fun ProgressBar.progressState(result: Result?) {
                 this.visibility = View.GONE
             }
         }
-    }?: run {
+    } ?: run {
         this.visibility = View.GONE
     }
 }
 
 @BindingAdapter("dateTimeConverter")
-fun TextView.dateTime(date:String){
+fun TextView.dateTime(date: String) {
     date?.let {
-        this.text= getDisplayableTime(date)
+        this.text = getDisplayableTime(date)
     }
 }
 
@@ -40,17 +41,22 @@ fun View.bindVisibility(visibleOrGone: Boolean) {
     this.visibility = visibility
 }
 
-@BindingAdapter("pagerAdapter")
-fun AutoScrollViewPager.bindAdapter(items:List<Pan3MsgDetailsItem>?) {
+@BindingAdapter(value = ["pagerAdapter", "indicator"])
+
+fun AutoScrollViewPager.bindAdapter(
+    items: List<Pan3MsgDetailsItem>?,
+    indicator: WormDotsIndicator
+) {
     items?.let {
         interval = 4000
         setScrollDurationFactor(3.0)
         startAutoScroll()
         this.adapter = HomePagerAdapter(context, items)
+        indicator.setViewPager(this)
     }
 }
 
 @BindingAdapter("srcImage")
-fun ImageView.bindPicassoImage(url:String?) {
+fun ImageView.bindPicassoImage(url: String?) {
     Picasso.get().load(url).fit().into(this)
 }

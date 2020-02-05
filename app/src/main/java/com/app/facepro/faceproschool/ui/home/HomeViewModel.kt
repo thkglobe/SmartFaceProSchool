@@ -9,10 +9,7 @@ import com.app.facepro.faceproschool.common.PreferenceConstants
 import com.app.facepro.faceproschool.common.PreferenceConstants.Companion.APP_CUSTOMER_ID
 import com.app.facepro.faceproschool.common.PreferenceManager
 import com.app.facepro.faceproschool.common.Result
-import com.app.facepro.faceproschool.ui.home.model.HomeRequest
-import com.app.facepro.faceproschool.ui.home.model.Pan1MsgDetailsItem
-import com.app.facepro.faceproschool.ui.home.model.Pan2MsgDetailsItem
-import com.app.facepro.faceproschool.ui.home.model.Pan3MsgDetailsItem
+import com.app.facepro.faceproschool.ui.home.model.*
 import com.app.facepro.faceproschool.utils.getDateDAY
 import com.app.facepro.faceproschool.utils.getDateMonth
 import kotlinx.coroutines.launch
@@ -25,6 +22,7 @@ class HomeViewModel(private val homeRepository: HomeRepository,private val prefe
     val pan1MsgDetailsItem = MutableLiveData<Pan1MsgDetailsItem>()
     val pan2MsgDetailsItem = MutableLiveData<Pan2MsgDetailsItem>()
     val pan3MsgDetailsItem = MutableLiveData<List<Pan3MsgDetailsItem?>>()
+    val pan4MsgDetailsItem = MutableLiveData<Pan4MsgDetails>()
     val countUpdateItem = MutableLiveData<Int>()
     val dateDay= getDateDAY()
     val dateMonth= getDateMonth()
@@ -42,6 +40,9 @@ class HomeViewModel(private val homeRepository: HomeRepository,private val prefe
                     }
                     data.pan2MsgDetails?.let {
                         pan2MsgDetailsItem.value = it[0]
+                    }
+                    data.pan4MsgDetails?.let {
+                        pan4MsgDetailsItem.value =it[0]
                     }
                     pan3MsgDetailsItem.value = data.pan3MsgDetails
                     countUpdateItem.value= data.pan1MsgDetails?.get(0)?.pan1ActnotifyCount?:0

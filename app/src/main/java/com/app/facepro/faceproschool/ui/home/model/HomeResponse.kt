@@ -18,5 +18,9 @@ data class HomeResponse(
     val pan3MsgDetails: List<Pan3MsgDetailsItem?>? = null,
     @SerializedName("pan1_msg_avaiable")
     val pan1MsgAvaiable: String? = null,
+    @SerializedName("pan4_msg_details")
+    val pan4MsgDetails: List<Pan4MsgDetails?>? = null,
+    @SerializedName("pan4_msg_avaiable")
+    val pan4MsgAvaiable: String? = null,
     val errorcode: String
 )

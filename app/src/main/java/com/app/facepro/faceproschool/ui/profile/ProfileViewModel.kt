@@ -10,11 +10,16 @@ import com.app.facepro.faceproschool.common.PreferenceConstants.Companion.APP_CU
 import com.app.facepro.faceproschool.common.PreferenceConstants.Companion.APP_CUSTOMER_LATITUDE
 import com.app.facepro.faceproschool.common.PreferenceConstants.Companion.APP_CUSTOMER_LONGITUDE
 import com.app.facepro.faceproschool.common.PreferenceConstants.Companion.APP_CUSTOMER_NAME
+import com.app.facepro.faceproschool.common.PreferenceConstants.Companion.APP_CUSTOMER_PROFILE_PHOTO
 import com.app.facepro.faceproschool.common.PreferenceConstants.Companion.APP_CUSTOMER_USER_ID
 import com.app.facepro.faceproschool.common.PreferenceManager
 import com.app.facepro.faceproschool.common.Result
 import com.app.facepro.faceproschool.ui.profile.model.ProfileRequest
 import kotlinx.coroutines.launch
+import okhttp3.MediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import java.io.File
 import java.lang.Exception
 
 class ProfileViewModel(private val preferenceManager: PreferenceManager, private val profileRepository: ProfileRepository):ViewModel() {
@@ -144,4 +149,35 @@ class ProfileViewModel(private val preferenceManager: PreferenceManager, private
             }
         }
     }
+
+    fun profilePictureUpload(file:File){
+        viewModelScope.launch {
+            result.value = Result.Progress
+            try {
+                val requestFile: RequestBody =
+                    RequestBody.create(MediaType.parse("multipart/form-data"), file)
+                val body: MultipartBody.Part =
+                    MultipartBody.Part.createFormData("file", file.name, requestFile)
+                val userId: RequestBody = RequestBody.create(
+                    MediaType.parse("multipart/form-data"), preferenceManager.getFromPreference(
+                        APP_CUSTOMER_USER_ID, ""
+                    )
+                )
+                val data=profileRepository.updateProfilePicture(body, userId)
+                if (data.actioncode == "0" && data.errorcode == "0") {
+                    result.value = Result.Success<Any>(data)
+                    preferenceManager.saveInPreference(
+                        APP_CUSTOMER_PROFILE_PHOTO,
+                        data.profile_photo
+                    )
+                }else{
+                    result.value = Result.Error(data.actionmsg)
+                }
+                }catch (e: Exception) {
+                result.value = Result.Failure(ErrorHandler() checkError e)
+            }
+        }
+    }
+
+    val profilePicture = preferenceManager.getFromPreference(APP_CUSTOMER_PROFILE_PHOTO, "")
 }

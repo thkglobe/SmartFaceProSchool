@@ -37,6 +37,35 @@
     },
     {
       "client_info": {
+        "mobilesdk_app_id": "1:980998233240:android:a34526fc524a6b574c84ed",
+        "android_client_info": {
+          "package_name": "com.app.facepro.faceprosecure"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "980998233240-9iou7iiqr2ace32p081l3lnsnqa4pibf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyClR_gFg9PARKUNDPet4_ShjtnSVNLE40k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "980998233240-9iou7iiqr2ace32p081l3lnsnqa4pibf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:980998233240:android:55a8cfc351b97e4a4c84ed",
         "android_client_info": {
           "package_name": "com.thkglobe.app.facepro"

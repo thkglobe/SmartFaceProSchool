@@ -1,8 +1,16 @@
 package com.app.facepro.faceproschool.utils
 
+import android.content.Context
+import android.database.Cursor
+import android.net.Uri
+import android.provider.MediaStore
+import android.util.Log
 import java.lang.System.currentTimeMillis
 import java.text.SimpleDateFormat
 import java.util.*
+import androidx.room.util.CursorUtil.getColumnIndexOrThrow
+
+
 
 
 fun getDisplayableTime(dataDate: String): String? {
@@ -67,4 +75,37 @@ fun getDateMonth(): String {
     val cal = Calendar.getInstance()
     val sdf = SimpleDateFormat("EEE\nMMM")
     return sdf.format(cal.time)
+}
+
+fun Uri.getPathString(context: Context): String {
+    var path: String = ""
+
+    context.contentResolver.query(
+        this, arrayOf(MediaStore.Images.Media.DATA),
+        null, null, null
+    )?.apply {
+        val columnIndex = getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
+        moveToFirst()
+        path = getString(columnIndex)
+        close()
+    }
+
+    return path
+}
+ fun getRealPathFromURI(context: Context, contentUri: Uri?): String {
+    var cursor: Cursor? = null
+    try {
+        val proj = arrayOf(MediaStore.Images.Media.DATA)
+        cursor = context.contentResolver.query(contentUri!!, proj, null, null, null)
+        val column_index = cursor!!.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
+        cursor!!.moveToFirst()
+        return cursor!!.getString(column_index)
+    } catch (e: Exception) {
+        Log.e("errio", "getRealPathFromURI Exception : $e")
+        return ""
+    } finally {
+        if (cursor != null) {
+            cursor!!.close()
+        }
+    }
 }

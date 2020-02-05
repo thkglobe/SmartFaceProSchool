@@ -14,6 +14,7 @@ import com.app.facepro.faceproschool.common.PreferenceConstants.Companion.APP_CU
 import com.app.facepro.faceproschool.common.PreferenceConstants.Companion.APP_CUSTOMER_LATITUDE
 import com.app.facepro.faceproschool.common.PreferenceConstants.Companion.APP_CUSTOMER_LONGITUDE
 import com.app.facepro.faceproschool.common.PreferenceConstants.Companion.APP_CUSTOMER_NAME
+import com.app.facepro.faceproschool.common.PreferenceConstants.Companion.APP_CUSTOMER_PROFILE_PHOTO
 import com.app.facepro.faceproschool.common.PreferenceConstants.Companion.APP_CUSTOMER_USER_ID
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -47,6 +48,7 @@ class LoginViewModel(
                     preferenceManager.saveInPreference(APP_CUSTOMER_LONGITUDE, data.profilePhoto)
                     preferenceManager.saveInPreference(APP_CUSTOMER_EMAIL_ADDRESS, data.emailId)
                     preferenceManager.saveInPreference(APP_CUSTOMER_USER_ID, userId.value!!)
+                    preferenceManager.saveInPreference(APP_CUSTOMER_PROFILE_PHOTO, data.profilePhoto)
                 } else {
                     loginResult.value = Result.Error(data.actionMsg)
                 }
